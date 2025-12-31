@@ -25,15 +25,16 @@ public class InputUtils {
     public int askForInt(String prompt) {
         while (true) {
             System.out.print(prompt);
+            String input = scanner.nextLine().strip();
 
-            if (scanner.hasNextInt()) {
-                int value = scanner.nextInt();
-                scanner.nextLine();
-                return value;
+            if (!input.isEmpty()) {
+                try {
+                    return Integer.parseInt(input);
+                } catch (NumberFormatException ignored) {}
             }
-
-            System.out.println("ERROR: An valid integer is required.\n");
-            scanner.nextLine();
+            
+            System.out.println("ERROR: An valid integer is required.");
+            System.out.println();
         }
     }
 }
