@@ -31,5 +31,32 @@ public class InputHandler {
         return Config.VALID_MENU_OPTIONS.contains(userOption);
     }
 
+    // Chat output methods
+    public String getChatName() {
+        return inputUtils.askForString("> How will you name the chat? ", true);
+    }
+
+    public void printChatName(String chatName) {
+        System.out.println(": Chat name: " + chatName);
+        printChatBarrier(20 + chatName.length());
+        System.out.println();
+    }
+
+    public void printChatBarrier(int amountOfTimes) {
+        for (int i = 0; i < amountOfTimes; i++) {
+            System.out.print("─");
+        }
+        System.out.println();
+    }
+
+    public void printChatInfoMessage() {
+        System.out.println(": To quit the chat - Enter /q command");
+        System.out.println(": For more help - Enter /help command");
+    }
+
+    // Chat input methods
+    public String getUserMessage() {
+        return inputUtils.askForString("> [YOU]: ", false);
+    }
 
 }

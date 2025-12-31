@@ -37,6 +37,34 @@ public class Chatbot {
     }
 
     public void startChat() {
-        
+        // get chat name
+        String chatName = inputHandler.getChatName();
+
+        // start
+        System.out.println();
+        inputHandler.printChatBarrier(75);
+
+        // info message to user
+        inputHandler.printChatInfoMessage();
+
+        inputHandler.printChatBarrier(75);
+        inputHandler.printChatName(chatName);
+
+        // Hard coded message from a bot
+        System.out.println("> [BOT]: Hello, there!");
+
+        while (true) {
+            // Need message value variable to store it to the database
+            String userMsg = inputHandler.getUserMessage();
+
+            if (userMsg.equals("/q")) {
+                break;
+            }
+
+            System.out.println("> [BOT]: \uD83D\uDC4D"); // Like emoji code! 👍
+        }
+
+        // end
+        inputHandler.printChatBarrier(75);
     }
 }
