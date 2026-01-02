@@ -1,17 +1,18 @@
-package input;
+package input_output;
 
 import config.Config;
 
 import java.util.Scanner;
 
 public class InputHandler {
-    private final InputUtils inputUtils;
+    private final input_output.InputUtils inputUtils;
     public InputHandler(Scanner scanner) {
         this.inputUtils = new InputUtils(scanner);
     }
 
     // Menu input methods
     public void showMenu() {
+        System.out.println();
         System.out.println("""
                 ┌─────────────────────────┐
                 │      EZChatbot CLI      │
@@ -57,6 +58,21 @@ public class InputHandler {
     // Chat input methods
     public String getUserMessage() {
         return inputUtils.askForString("> [YOU]: ", false);
+    }
+
+    public String getSaveYesOrNot() {
+        while (true) {
+            String userAnswer = inputUtils.askForString("> Would you like to save this chat (Y/N)? ", true);
+            userAnswer = userAnswer.toLowerCase().strip();
+
+            if (!userAnswer.equals("y") && !userAnswer.equals("n")) {
+                System.out.println(": ERROR: Invalid option, please type either Y or N.");
+                System.out.println();
+                continue;
+            }
+
+            return userAnswer;
+        }
     }
 
 }

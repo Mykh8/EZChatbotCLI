@@ -1,4 +1,4 @@
-package input;
+package input_output;
 
 import java.util.Scanner;
 
@@ -17,7 +17,7 @@ public class InputUtils {
                 return userInput;
             }
 
-            System.out.println("ERROR: This field is required.");
+            System.out.println(": ERROR: This field is required.");
             System.out.println();
         }
     }
@@ -32,8 +32,8 @@ public class InputUtils {
                     return Integer.parseInt(input);
                 } catch (NumberFormatException ignored) {}
             }
-            
-            System.out.println("ERROR: An valid integer is required.");
+
+            System.out.println(": ERROR: An valid integer is required.");
             System.out.println();
         }
     }

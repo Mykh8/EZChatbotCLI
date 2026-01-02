@@ -1,11 +1,15 @@
 package bot;
 
-import input.InputHandler;
+import input_output.InputHandler;
 
 import java.util.Scanner;
 
+import api.AiClient;
+
 public class Chatbot {
     private final InputHandler inputHandler;
+    private final AiClient aiClient = new AiClient();
+
     public Chatbot(Scanner scanner) {
         this.inputHandler = new InputHandler(scanner);
     }
@@ -16,7 +20,7 @@ public class Chatbot {
             int userMenuOption = inputHandler.getUserMenuOption();
 
             if (!inputHandler.isValidMenuOption(userMenuOption)) {
-                System.out.println("ERROR: Invalid option\n");
+                System.out.println(": ERROR: Invalid option\n");
                 continue;
             }
 
@@ -50,21 +54,37 @@ public class Chatbot {
         inputHandler.printChatBarrier(75);
         inputHandler.printChatName(chatName);
 
-        // Hard coded message from a bot
-        System.out.println("> [BOT]: Hello, there!");
 
+        // start chat loop
         while (true) {
             // Need message value variable to store it to the database
             String userMsg = inputHandler.getUserMessage();
 
             if (userMsg.equals("/q")) {
-                break;
+                break; // end chat loop
             }
 
-            System.out.println("> [BOT]: \uD83D\uDC4D"); // Like emoji code! 👍
+            System.out.println();
+            String response = aiClient.getResponse(userMsg);
+            System.out.println("> [BOT]: " + response);
         }
 
+        inputHandler.printChatBarrier(75);
+
         // end
+        stopChat();
+    }
+
+    public void stopChat() {
+        System.out.println();
+        String saveYesOrNot = inputHandler.getSaveYesOrNot();
+
+        if (saveYesOrNot.equals("y")) {
+            System.out.println(": INFO: Chat was successfully saved.");
+        } else {
+            System.out.println(": INFO: Chat data was deleted.");
+        }
+
         inputHandler.printChatBarrier(75);
     }
 }
